@@ -14,7 +14,7 @@
 <h3> How to use </h3>
 <ol>
 <li>Changing the value of MANA in the gui will change value in game</li>
-<li>Press "space" to start/stop/toggle fly hack (try few times if it doesnt work), press "W" to fly fast</li>
+<li>Press 9 to start flyhack and 0 to stop flyhack, press "W" to fly forward fast</li>
 </ol>
 
 <h3>Upcoming</h3>
