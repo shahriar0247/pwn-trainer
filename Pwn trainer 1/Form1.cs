@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -102,8 +102,8 @@ namespace Pwn_trainer_1
                 current_x = Memory.ReadFloat("pwn3.exe+0x01900600,20,64,720,318,238,114,94");
                 current_y = Memory.ReadFloat("pwn3.exe+0x01900600,20,64,720,318,238,114,90");
                 rotation = Memory.ReadFloat("pwn3.exe+0x019019A0,44C,C0,3C8,4,108,2FC,254");
+                height = Memory.ReadFloat("pwn3.exe+0x01900600,20,64,720,318,238,114,98");
 
-           
 
                 Thread.sleep(5);
                 for (int i = 32; i < 127; i++)
@@ -112,19 +112,23 @@ namespace Pwn_trainer_1
                     int keyState = GetAsyncKeyState(i);
                     if (keyState == 32768)
                     {
-                        if (i == 32)
+                        if (i == 32 && lock_height == true)
                         {
                             height = Memory.ReadFloat("pwn3.exe+0x01900600,20,64,720,318,238,114,98");
                             height = height + 100;
-                            if (lock_height == true)
-                            {
-                                lock_height = false;
-                            }
-                            else
-                            {
-                                lock_height = true;
-                            }
+                         
                         }
+
+                        
+                        if (i == 48)
+                        {
+                            lock_height = false;
+                        }
+                        if (i == 57)
+                        {
+                            lock_height = true;
+                        }
+
                         if ((Char)i == 'E')
                         {
                             current_x = Memory.ReadFloat("pwn3.exe+0x01900600,20,64,720,318,238,114,94");
@@ -186,12 +190,13 @@ namespace Pwn_trainer_1
 
                     }
                     //Memory.WriteMemory("pwn3.exe+0x01900600,20,64,720,318,238,114,98", "float", height.ToString());
-                    Memory.WriteMemory("pwn3.exe+0x01900600,20,64,720,318,238,114,94", "float", new_x.ToString());
-                    Memory.WriteMemory("pwn3.exe+0x01900600,20,64,720,318,238,114,90", "float", new_y.ToString());
+                  
 
                     if (lock_height == true)
                     {
                         Memory.WriteMemory("pwn3.exe+0x01900600,20,64,720,318,238,114,98", "float", height.ToString());
+                        Memory.WriteMemory("pwn3.exe+0x01900600,20,64,720,318,238,114,94", "float", new_x.ToString());
+                        Memory.WriteMemory("pwn3.exe+0x01900600,20,64,720,318,238,114,90", "float", new_y.ToString());
                     }
                 }
             }
